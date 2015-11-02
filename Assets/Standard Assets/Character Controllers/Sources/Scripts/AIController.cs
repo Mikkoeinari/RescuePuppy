@@ -52,9 +52,8 @@ public class AIController:MonoBehaviour
 			attributes.setHunger (attributes.getHunger () - 0.1f);
 			ticks = Time.time;
 		}
-		if (attributes.getEnergy () < 0.5f && finishedActivity == 1) {
+		if (attributes.getEnergy () < 0.5f && !busy) {
 			StartCoroutine (rest ());
-
 		}
 		Vector3 playerPos = player.transform.localPosition;
 		float playerDistance = Vector3.Distance (player.transform.localPosition, transform.localPosition);
@@ -137,12 +136,10 @@ public class AIController:MonoBehaviour
 			yield return new WaitForEndOfFrame ();
 		}
 		busy = true;
-		finishedActivity = 0;
 		_animation.CrossFade (idleAnimation.name);
 		yield return new WaitForSeconds (3);
 		_animation.CrossFade (meowAnimation.name);
 		yield return new WaitForSeconds (2);
-		finishedActivity = 1;
 		busy = false;
 	}
 	IEnumerator rest ()
@@ -154,7 +151,7 @@ public class AIController:MonoBehaviour
 		_animation.CrossFade (sitAnimation.name);
 		while (attributes.getEnergy()<1.5f) {
 			if (busy == false) {
-				break;
+				return true;
 			}
 			yield return new WaitForSeconds (5);
 			attributes.setEnergy (attributes.getEnergy () + 0.1f);
