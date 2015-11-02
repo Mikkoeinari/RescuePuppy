@@ -8519,6 +8519,7 @@ MonoBehaviour:
   runAnimation: {fileID: 7400006, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   scratchAnimation: {fileID: 7400012, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   meowAnimation: {fileID: 7400014, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
+  sitAnimation: {fileID: 7400016, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   minDist: 1
   minPlayerDistance: 1
   resumeDistance: 3
