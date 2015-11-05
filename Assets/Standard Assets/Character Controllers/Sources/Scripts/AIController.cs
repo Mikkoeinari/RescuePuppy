@@ -13,6 +13,8 @@ public class AIController:MonoBehaviour
 	public AnimationClip scratchAnimation;
 	public AnimationClip meowAnimation;
 	public AnimationClip sitAnimation;
+	public AnimationClip downAnimation;
+	public AnimationClip upAnimation;
 	public float minDist = 1;
 	public float minPlayerDistance = 1;
 	public float resumeDistance = 3;
@@ -23,7 +25,7 @@ public class AIController:MonoBehaviour
 	private int objectReached = 1;
 	private GameObject[] interestings;
 	private Collider coll;
-	private int finishedActivity = 1;
+	//private int finishedActivity = 1;
 	private int escaped = 1;
 	private float affection = 0;
 	private float chaseTime = 0;
@@ -50,15 +52,20 @@ public class AIController:MonoBehaviour
 		if (Time.time - ticks > 10) {
 			print (Time.time);
 			attributes.setHunger (attributes.getHunger () - 0.1f);
+			if (attributes.getHunger()<0.5f){
+				attributes.setEnergy (attributes.getEnergy () - 0.1f);
+			}
 			ticks = Time.time;
 		}
-		if (attributes.getEnergy () < 0.5f && !busy) {
+		if (attributes.getEnergy () < 0.5f && !busy && escaped==1) {
 			StartCoroutine (rest ());
 		}
 		Vector3 playerPos = player.transform.localPosition;
 		float playerDistance = Vector3.Distance (player.transform.localPosition, transform.localPosition);
 		if (playerDistance < minPlayerDistance || escaped == 0) {
-			busy = false;
+			if (busy){
+				busy = false;
+			}
 			escaped = 0;
 			playerPos.y = transform.localPosition.y;
 			transform.LookAt (2 * transform.localPosition - playerPos);
@@ -128,42 +135,58 @@ public class AIController:MonoBehaviour
 	{
 		controller.SimpleMove (speed * 2 * transform.forward);
 		_animation.CrossFade (runAnimation.name);
- 	
 	}
 	IEnumerator assess ()
 	{
-		while (busy) {
-			yield return new WaitForEndOfFrame ();
+		if (busy) {
+			yield break;
+		} else {
+			busy = true;
 		}
-		busy = true;
-		_animation.CrossFade (idleAnimation.name);
-		yield return new WaitForSeconds (3);
-		_animation.CrossFade (meowAnimation.name);
-		yield return new WaitForSeconds (2);
+		if (busy) {
+			_animation.CrossFade (idleAnimation.name);
+		} else {
+			yield break;
+		}
+			yield return new WaitForSeconds (3);
+		if (busy) {
+			_animation.CrossFade (meowAnimation.name);
+		} else {
+			yield break;
+		}
+			yield return new WaitForSeconds (2);
 		busy = false;
 	}
 	IEnumerator rest ()
-	{
-		while (busy) {
-			yield return new WaitForEndOfFrame ();
+	{	
+		if (busy) {
+			yield break;
+		} else {
+			busy = true;
 		}
-		busy = true;
-		_animation.CrossFade (sitAnimation.name);
-		while (attributes.getEnergy()<1.5f) {
-			if (busy == false) {
-				return true;
-			}
+		_animation.CrossFade (downAnimation.name);
+		yield return new WaitForSeconds (1);
+		while (attributes.getEnergy()<1.5f&& busy) {
+			_animation.CrossFade (sitAnimation.name);
 			yield return new WaitForSeconds (5);
-			attributes.setEnergy (attributes.getEnergy () + 0.1f);
+			if (busy) {
+				attributes.setEnergy (attributes.getEnergy () + 0.1f);
+			} else {
+				yield break;
+			}
 		}
+		_animation.CrossFade (upAnimation.name);
+		yield return new WaitForSeconds (1);
 		busy = false;
+
 	}
 	IEnumerator activity ()
 	{
-		while (busy) {
-			yield return new WaitForEndOfFrame ();
+		if (busy) {
+			yield break;
+		} else {
+			busy = true;
 		}
-		busy = true;
 		int rand = Random.Range (1, 10);
 		_animation.CrossFade (idleAnimation.name);
 		yield return new WaitForSeconds (rand);

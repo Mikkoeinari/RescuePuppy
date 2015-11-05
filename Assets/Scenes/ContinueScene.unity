@@ -2785,7 +2785,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 536, y: -23}
+  m_AnchoredPosition: {x: 120, y: -69}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &613931207
@@ -3290,7 +3290,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 334, y: -23}
+  m_AnchoredPosition: {x: 120, y: -46}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &734983840
@@ -4962,7 +4962,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 129, y: -23}
+  m_AnchoredPosition: {x: 120, y: -23}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1106146327
@@ -7163,7 +7163,7 @@ GameObject:
   - 114: {fileID: 1509759293}
   - 114: {fileID: 1509759292}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8480,6 +8480,8 @@ Animation:
   - {fileID: 7400012, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   - {fileID: 7400014, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   - {fileID: 7400016, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
+  - {fileID: 7400018, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
+  - {fileID: 7400022, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -8520,6 +8522,8 @@ MonoBehaviour:
   scratchAnimation: {fileID: 7400012, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   meowAnimation: {fileID: 7400014, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   sitAnimation: {fileID: 7400016, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
+  downAnimation: {fileID: 7400018, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
+  upAnimation: {fileID: 7400022, guid: f39b1400e9461b94aa1ef06930d090b5, type: 3}
   minDist: 1
   minPlayerDistance: 1
   resumeDistance: 3
